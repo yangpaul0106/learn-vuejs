@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>js in template</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p v-if='seen'>现在你看到我了</p>
+        <a v-bind:href="url">v-bind:href谷歌</a></br> <!-- v-bind后接一个参数href -->
+        <a v-bind:[jshref]="url">v-bind:[jshref]谷歌</a></br> <!-- 此处的[]内会进行计算并求得等号左边的值为href -->
+        <!--
+            <a v-on:focus="func1">事件1</a></br>  此处的[]内会进行计算并求得等号左边的值为focus 
+            <a v-on:[eventName]="func2">事件2</a></br>  此处的[]内会进行计算并求得等号左边的值为onmouseover 
+            <form v-on:submit.prevent="onSubmit">...</form>修饰符 (modifier) 是以半角句号 . 指明的特殊后缀，
+            用于指出一个指令应该以特殊方式绑定。例如，.prevent 修饰符告诉 v-on 指令对于触发的事件调用 event.preventDefault()
+        -->
+        <!--
+            <a v-bind:href="url">...</a>
+            <a :href="url">...</a>
+
+            <a v-on:click="doSomething">...</a>
+            <a @click="doSomething">...</a>
+        -->
+    </div>
+    <script>
+        var app1 = new Vue({
+            el: '#app',
+            data: {
+                seen: false,
+                url: 'https://www.google.com',
+                // url: 'https://www.youtube.com'
+                jshref: 'href',
+                eventName: 'focus'
+            }
+        })
+    </script>
+</body>
+
+</html>

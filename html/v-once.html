@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>v-once instruction</title>
+        <script src="../vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <span v-once>这个将不会改变: {{ foo }}</span>
+            <button v-on:click="foo = 'baz'">Change it</button>
+        </div>
+        <script>
+            var obj = {
+                foo: 'bar'
+            }
+
+            new Vue({
+                el: '#app',
+                data: obj
+            })
+        </script>
+    </body>
+</html>

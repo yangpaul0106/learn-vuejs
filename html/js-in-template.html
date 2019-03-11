@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>js in template</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{number + 1 }}</p>
+        <p>{{ok ? 'YES' : 'NO'}}</p>
+        <p>{{ message.split('').reverse().join('') }}</p>
+    </div>
+    <script>
+        var obj = {
+            foo: 'bar'
+        }
+
+        new Vue({
+            el: '#app',
+            data: {
+                obj,
+                number: 1,
+                ok: true,
+                message: 'Java golang python js'
+            }
+        })
+    </script>
+</body>
+
+</html>
