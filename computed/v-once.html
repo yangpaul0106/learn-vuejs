@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>computed</title>
+        <script src="../vue.js"></script>
+    </head>
+    <body>
+        <div id="example">
+            <p>Original message: "{{ message }}"</p>
+            <p>Computed reversed message: "{{ reversedMessage }}"</p>
+        </div>
+        <script>
+          var vm = new Vue({
+                el: '#example',
+                data: {
+                    message: 'Hello'
+                },
+                computed: { //计算属性是基于它们的依赖进行缓存的,只要message值没有变，
+                    //多次请求computed就不会重新求值。如果你不希望有缓存，请用方法来替代
+                    reversedMessage: function () {
+                        return this.message.split('').reverse().join('')
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

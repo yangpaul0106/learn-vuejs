@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>watch</title>
+        <script src="../vue.js"></script>
+    </head>
+    <body>
+        <div id="demo">
+            {{ fullName }}
+        </div>
+        <script>
+          var vm = new Vue({
+                el: '#demo',
+                data: {
+                    firstName: 'Foo',
+                    lastName: 'Bar',
+                    // fullName: 'Foo Bar'
+                },
+                // watch: { 这段代码是命令式且重复的，应该使用computed
+                //     firstName: function (val) {
+                //         this.fullName = val + ' ' + this.lastName
+                //     },
+                //     lastName: function (val) {
+                //         this.fullName = this.firstName + ' ' + val
+                //     }
+                // }
+                computed: {
+                    fullName: function () {
+                        return this.firstName + ' ' + this.lastName
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
