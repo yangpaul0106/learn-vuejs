@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>style</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="demo" v-bind:class="classObject"></div>
+    <!-- A <div v-bind:class="[activeClass, errorClass]"></div> 渲染成：<div class="active text-danger"></div>-->
+    <!-- B <div v-bind:class="[isActive ? activeClass : '', errorClass]"></div> -->
+    <!-- C <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div> -->
+    <!-- D <div v-bind:style="styleObject"></div> -->
+    <!-- E <div v-bind:style="[baseStyles, overridingStyles]"></div> -->
+    <script>
+        var vm = new Vue({
+            el: '#demo',
+            data: {
+                isActive: true,
+                hasError: false,
+                // A activeClass: 'active',
+                //A  errorClass: 'text-danger'
+                // C activeColor: 'red',
+                // C fontSize: 30
+                // D styleObject: {
+                // D    color: 'red',
+                // D    fontSize: '13px'
+                // D }
+            },
+            computed: {
+                classObject: function () {
+                    return {
+                        active: this.isActive && !this.error, 'text-danger': this.error && this.error.type === 'fatal'
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

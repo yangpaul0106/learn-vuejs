@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>component-restructure</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+<div id="components-demo">
+    <blog-post
+            v-for="post in posts"
+            v-bind:key="post.id"
+            v-bind:post="post"
+    ></blog-post>
+</div>
+<script>
+    Vue.component('blog-post', {
+        props: ['post'],    // props中的内容与template关联
+        template: `
+            <div class="blog-post">
+              <h1>{{ post.title }}</h1>
+               <h3>{{ post.pubdate }}</h3>
+              <div v-html="post.content"></div>
+            </div>
+            `
+    })
+    new Vue({
+        el: '#components-demo',
+        data: {
+            posts: [
+                {id: 1, title: "My journey with Vue", pubdate: "2019-3-13", content: "today is a nice day, i'm very happy to china"},
+                {id: 2, title: "Blogging with Vue", pubdate: "2019-3-13", content: "what the hell you doing ??"},
+                {id: 3, title: "Why Vue is so fun", pubdate: "2019-3-13", content: "you got it !"}
+            ]
+        }
+    })
+</script>
+</body>
+
+</html>

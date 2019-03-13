@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>listen-child-component</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+<!--这里是子组件-->
+<!--这里的v-bind冒号后面的post对应porps里面的post,并且props里面的post对应template里面的post-->
+
+<!--$event可以访问emit()函数抛出的第二个参数-->
+<!--v-on:enlarge-text="postFontSize += $event"-->
+<div id="blog-posts-events-demo">
+    <div :style="{ fontSize: postFontSize + 'em' }">
+        <blog-post
+                v-for="post in posts"
+                v-bind:key="post.id"
+                v-bind:postss="post"
+                v-on:enlarge-text="postFontSize += 0.1"
+        ></blog-post>
+    </div>
+</div>
+<script>
+    Vue.component('blog-post', {
+        props: ['postss'],    // props中的内容与template关联
+        template: `
+            <div class="blog-post">
+              <h3>{{ postss.title }}</h3>
+              <button v-on:click="$emit('enlarge-text')"> Enlarge text</button>
+              <!--<button v-on:click="$emit('enlarge-text', 0.1)"> Enlarge text</button>-->
+              <div v-html="postss.content"></div>
+            </div>
+            `
+        // emit(eventName)函数，触发当前实例上的事件,关联到子组件的on-click事件
+    })
+    new Vue({   // 这是父组件
+        el: '#blog-posts-events-demo',
+        data: {
+            posts: [
+                {id: 1, title: "My journey with Vue", content: "today is a nice day, i'm very happy to china"},
+                {id: 2, title: "Blogging with Vue", content: "what the hell you doing ??"},
+                {id: 3, title: "Why Vue is so fun", content: "you got it !"}
+            ],
+            postFontSize: 1
+        }
+    })
+</script>
+</body>
+
+</html>
